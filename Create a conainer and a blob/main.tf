@@ -24,34 +24,34 @@ provider "azurerm" {
 # The resource block defines the type of resouce we want to work with
 # The name and location are arguments for the resource block
 
-resource "azurerm_resource_group" "app_grp" {
+resource "azurerm_resource_group" "example" {
 name = "app-grp"
 location = "east us"
 }
 
 # Create a Storage Account
 
-resource "azurerm_storage_account" "storage_account" {
+resource "azurerm_storage_account" "example" {
   name                     = "terraformstorage678394"
-  resource_group_name      = "app-grp"
-  location                 = "east us"
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
 # To Create a Container
-resource "azurerm_storage_container" "data" {
+resource "azurerm_storage_container" "example" {
   name                  = "container1"
-  storage_account_name  = "terraformstorage678394"
+  storage_account_name  = azurerm_storage_account.example.name
   container_access_type = "private"
 }
 
 # This is used to upload a file onto the container
 
-resource "azurerm_storage_blob" "sample" {
+resource "azurerm_storage_blob" "example" {
   name                   = "samplefile.txt"
-  storage_account_name   = "terraformstorage678394"
-  storage_container_name = "container1"
+  storage_account_name   = azurerm_storage_account.example.name
+  storage_container_name = azurerm_storage_container.example.name
   type                   = "Block"
   source                 = "samplefile.txt"
   }
