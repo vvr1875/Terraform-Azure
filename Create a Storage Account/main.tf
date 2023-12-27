@@ -24,17 +24,17 @@ provider "azurerm" {
 # The resource block defines the type of resouce we want to work with
 # The name and location are arguments for the resource block
 
-resource "azurerm_resource_group" "app_grp" {
+resource "azurerm_resource_group" "example" {
 name = "app-grp"
 location = "east us"
 }
 
 # Create a Storage Account
 
-resource "azurerm_storage_account" "storage_account" {
-  name                     = "terraformstorage67394"
-  resource_group_name      = "app-grp"
-  location                 = "east us"
+resource "azurerm_storage_account" "example" {
+  name                     = "terraformstorage678394"
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
