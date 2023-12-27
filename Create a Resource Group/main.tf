@@ -24,7 +24,7 @@ provider "azurerm" {
 # The resource block defines the type of resouce we want to work with
 # The name and location are arguments for the resource block
 
-resource "azurerm_resource_group" "app_grp" {
+resource "azurerm_resource_group" "example" {
 name = "app-grp"
 location = "east us"
 }
